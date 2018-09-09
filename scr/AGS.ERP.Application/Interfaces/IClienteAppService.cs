@@ -11,7 +11,7 @@ namespace AGS.ERP.Application.Interfaces
         ClienteViewModel GetById(int id);
         IEnumerable<ClienteViewModel> GetAll();
         void Update(ClienteViewModel clienteViewModel);
-        void Remove(ClienteViewModel clienteViewModel);
+        void Remove(int id);
         int ObterTotalRegistros(string pesquisa);
         IEnumerable<ClienteViewModel> ObterClientesGrid(int page, string pesquisa);
     }

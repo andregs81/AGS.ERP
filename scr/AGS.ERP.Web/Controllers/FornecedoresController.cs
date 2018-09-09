@@ -12,28 +12,22 @@ using AGS.ERP.Application.ViewModel;
 
 namespace AGS.ERP.Web.Controllers
 {
-    public class ClienteController : Controller
+    public class FornecedoresController : Controller
     {
-        private readonly IClienteAppService _clienteAppService;
-        private readonly IEstadoAppService _estadoAppService;
-        private readonly ICidadeAppService _cidadeAppService;
+        private readonly IFornecedorAppService _fornecedorAppService;
 
-        public ClienteController(IClienteAppService clienteAppService,
-                                 IEstadoAppService estadoAppService,
-                                 ICidadeAppService cidadeAppService)
+        public FornecedoresController(IFornecedorAppService fornecedorAppService)
         {
-            _clienteAppService = clienteAppService;
-            _estadoAppService = estadoAppService;
-            _cidadeAppService = cidadeAppService;
+            _fornecedorAppService = fornecedorAppService;
         }
 
-        // GET: Cliente
+        // GET: Fornecedores
         public IActionResult Index()
         {
-            return View(_clienteAppService.GetAll());
+            return View(_fornecedorAppService.GetAll());
         }
 
-        // GET: Cliente/Details/5
+        // GET: Fornecedores/Details/5
         public IActionResult Details(int id)
         {
             if (id == null)
@@ -41,41 +35,38 @@ namespace AGS.ERP.Web.Controllers
                 return NotFound();
             }
 
-            var cliente = _clienteAppService.GetById(id);
-            if (cliente == null)
+            var fornecedor = _fornecedorAppService.GetById(id);
+                
+            if (fornecedor == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(fornecedor);
         }
 
-        // GET: Cliente/Create
+        // GET: Fornecedores/Create
         public IActionResult Create()
         {
-            ViewBag.UF = new SelectList(_estadoAppService.GetAll().OrderBy(e => e.UF), "UF", "Nome");
-            ViewBag.CidadeId = new SelectList(_cidadeAppService.GetAll().OrderBy(e => e.UF), "CidadeId", "Nome");
-            ViewBag.TipoEndereco = new SelectList(Enum.GetValues(typeof(TipoEnderecoViewModel)));
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Fornecedores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ClienteEnderecoViewModel cliente)
+        public IActionResult Create(FornecedorViewModel fornecedor)
         {
             if (ModelState.IsValid)
             {
-                
-                _clienteAppService.Add(cliente);
+                _fornecedorAppService.Add(fornecedor);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(fornecedor);
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Fornecedores/Edit/5
         public IActionResult Edit(int id)
         {
             if (id == null)
@@ -83,22 +74,22 @@ namespace AGS.ERP.Web.Controllers
                 return NotFound();
             }
 
-            var cliente = _clienteAppService.GetById(id);
-            if (cliente == null)
+            var fornecedor = _fornecedorAppService.GetById(id);
+            if (fornecedor == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return View(fornecedor);
         }
 
-        // POST: Cliente/Edit/5
+        // POST: Fornecedores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ClienteViewModel cliente)
+        public IActionResult Edit(int id, FornecedorViewModel fornecedor)
         {
-            if (id != cliente.ClienteId)
+            if (id != fornecedor.FornecedorId)
             {
                 return NotFound();
             }
@@ -107,11 +98,11 @@ namespace AGS.ERP.Web.Controllers
             {
                 try
                 {
-                    _clienteAppService.Update(cliente);
+                    _fornecedorAppService.Update(fornecedor);                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.ClienteId))
+                    if (!FornecedorExists(fornecedor.FornecedorId))
                     {
                         return NotFound();
                     }
@@ -122,10 +113,10 @@ namespace AGS.ERP.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(fornecedor);
         }
 
-        // GET: Cliente/Delete/5
+        // GET: Fornecedores/Delete/5
         public IActionResult Delete(int id)
         {
             if (id == null)
@@ -133,41 +124,34 @@ namespace AGS.ERP.Web.Controllers
                 return NotFound();
             }
 
-            var cliente = _clienteAppService.GetById(id);
-                
-            if (cliente == null)
+            var fornecedor = _fornecedorAppService.GetById(id);
+            if (fornecedor == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(fornecedor);
         }
 
-        // POST: Cliente/Delete/5
+        // POST: Fornecedores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var cliente = _clienteAppService.GetById(id);
-
-            if (cliente == null)
+            var fornecedor = _fornecedorAppService.GetById(id);
+            if (fornecedor == null)
             {
                 return NotFound();
             }
-            _clienteAppService.Remove(id);
+            _fornecedorAppService.Remove(id);
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool FornecedorExists(int id)
         {
-            //TODO: Melhorar metodo
-            return !string.IsNullOrEmpty(_clienteAppService.GetById(id).ClienteId.ToString());
-        }
+            return !(_fornecedorAppService.GetById(id).FornecedorId.ToString() == string.Empty);
 
-        public JsonResult GetStateByCity(int idCidade)
-        {
-            var estado = _estadoAppService.GetByUF(_cidadeAppService.GetById(idCidade).UF);
-            return Json(estado);
         }
     }
 }

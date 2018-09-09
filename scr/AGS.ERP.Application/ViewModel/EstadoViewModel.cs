@@ -9,7 +9,7 @@ namespace AGS.ERP.Application.ViewModel
     {
         public EstadoViewModel()
         {
-            //Cidades = new List<CidadeViewModel>();
+            
         }
 
         [Key]
@@ -19,6 +19,6 @@ namespace AGS.ERP.Application.ViewModel
         [Required(ErrorMessage ="Campo obrigátorio")]
         public string Nome { get; set; }
 
-        //public virtual ICollection<CidadeViewModel> Cidades { get; set; }
+
     }
 }

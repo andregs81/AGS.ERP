@@ -11,7 +11,7 @@ namespace AGS.ERP.Application.Interfaces
         EstadoViewModel GetByUF(string UF);
         IEnumerable<EstadoViewModel> GetAll();
         void Update(EstadoViewModel obj);
-        void Remove(EstadoViewModel obj);
+        void Remove(int id);
         int SaveChanges();
     }
 }

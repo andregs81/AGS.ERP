@@ -11,7 +11,7 @@ namespace AGS.ERP.Domain.Interfaces.Services
         TEntity GetById(int id);
         IEnumerable<TEntity> GetAll();
         void Update(TEntity obj);
-        void Remove(TEntity obj);
+        void Remove(int id);
         int SaveChanges();
         void Dispose();
     }

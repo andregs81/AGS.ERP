@@ -7,10 +7,6 @@ namespace AGS.ERP.Application.ViewModel
 {
     public class ClienteViewModel
     {
-        public ClienteViewModel()
-        {
-            
-        }
 
         [Key]
         public int ClienteId { get; set; }
@@ -29,6 +25,8 @@ namespace AGS.ERP.Application.ViewModel
 
         public virtual IEnumerable<EnderecoViewModel> Endereco { get; set; }
 
+
+        public ValidationResult ResultadoValidacao { get; private set; }
 
     }
 }

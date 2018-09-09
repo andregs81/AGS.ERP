@@ -30,9 +30,9 @@ namespace AGS.ERP.Domain.Service
             return _repository.GetAll();
         }
 
-        public virtual void Remove(TEntity obj)
+        public virtual void Remove(int id)
         {
-            _repository.Remove(obj);
+            _repository.Remove(id);
         }
 
         public virtual void Update(TEntity obj)
@@ -49,6 +49,5 @@ namespace AGS.ERP.Domain.Service
         {
             _repository.Dispose();
         }
-
     }
 }

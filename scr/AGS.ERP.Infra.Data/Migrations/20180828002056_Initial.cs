@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AGS.ERP.Infra.Data.Migrations
 {
-    public partial class IniciarDB : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,18 +36,18 @@ namespace AGS.ERP.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fornecedor",
+                name: "Fornecedores",
                 columns: table => new
                 {
                     FornecedorId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: true),
-                    CNPJ = table.Column<string>(nullable: true),
-                    CPF = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
+                    CNPJ = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: true),
+                    CPF = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fornecedor", x => x.FornecedorId);
+                    table.PrimaryKey("PK_Fornecedores", x => x.FornecedorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,9 +154,9 @@ namespace AGS.ERP.Infra.Data.Migrations
                         principalColumn: "ClienteId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Endereco_Fornecedor_FornecedorId",
+                        name: "FK_Endereco_Fornecedores_FornecedorId",
                         column: x => x.FornecedorId,
-                        principalTable: "Fornecedor",
+                        principalTable: "Fornecedores",
                         principalColumn: "FornecedorId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -213,7 +213,7 @@ namespace AGS.ERP.Infra.Data.Migrations
                 name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Fornecedor");
+                name: "Fornecedores");
 
             migrationBuilder.DropTable(
                 name: "Produto");

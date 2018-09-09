@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using AGS.ERP.Application.Interfaces;
+﻿using AGS.ERP.Application.Interfaces;
 using AGS.ERP.Application.Validation;
 using AGS.ERP.Application.ViewModel;
 using AGS.ERP.Domain.Entities;
 using AGS.ERP.Domain.Entities.Geografia;
-using AGS.ERP.Domain.Interfaces.Repository;
 using AGS.ERP.Domain.Interfaces.Services;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace AGS.ERP.Application.Services
 {
@@ -64,11 +63,9 @@ namespace AGS.ERP.Application.Services
             throw new System.NotImplementedException();
         }
 
-        public void Remove(ClienteViewModel clienteViewModel)
+        public void Remove(int id)
         {
-            var cliente = Mapper.Map<ClienteViewModel, Cliente>(clienteViewModel);
-
-            _clienteService.Remove(cliente);
+           _clienteService.Remove(id);
             _clienteService.SaveChanges();
         }
 

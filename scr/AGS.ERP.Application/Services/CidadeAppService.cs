@@ -34,10 +34,9 @@ namespace AGS.ERP.Application.Services
             return Mapper.Map<Cidade, CidadeViewModel>(_cidadeService.GetById(id));
         }
 
-        public void Remove(CidadeViewModel obj)
+        public void Remove(int id)
         {
-            var cidade = Mapper.Map<CidadeViewModel, Cidade>(obj);
-            _cidadeService.Remove(cidade);
+            _cidadeService.Remove(id);
             _cidadeService.SaveChanges();
         }
 
@@ -49,14 +48,14 @@ namespace AGS.ERP.Application.Services
             _cidadeService.SaveChanges();
         }
 
-        public void Dispose()
-        {
-            _cidadeService.Dispose();
-        }
-
         public int SaveChanges()
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            _cidadeService.Dispose();
         }
     }
 }

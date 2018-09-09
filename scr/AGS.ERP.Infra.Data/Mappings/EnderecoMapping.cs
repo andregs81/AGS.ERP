@@ -41,23 +41,8 @@ namespace AGS.ERP.Infra.Data.Mappings
                 .HasMaxLength(2)
                 .HasColumnType("Char(2)")
                 .IsRequired();
-
-            builder.HasOne(e => e.Cidade);
-            builder.HasOne(e => e.Estado);
-
-            builder.HasOne(e => e.Fornecedor)
-                .WithMany(f => f.Endereco)
-                .HasForeignKey("FornecedorId")
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(e => e.Cliente)
-                .WithMany(f => f.Endereco)
-                .HasForeignKey("ClienteId")
-                .OnDelete(DeleteBehavior.Restrict);
-
-
-
-
+               
+                
         }
     }
 }

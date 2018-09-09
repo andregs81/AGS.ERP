@@ -1,12 +1,17 @@
-﻿using System;
+﻿using AGS.ERP.Application.Validation;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace AGS.ERP.Application.ViewModel
 {
     public class ClienteEnderecoViewModel
     {
+        public ClienteEnderecoViewModel()
+        {
+            Endereco = new List<EnderecoViewModel>();
+        }
+
+        [Key]
         public int ClienteId { get; set; }
         [Required(ErrorMessage ="O nome é obrigatório")]
         [MinLength(3, ErrorMessage = "O tamanho mínimo para o Nome é {1}")]
@@ -22,6 +27,7 @@ namespace AGS.ERP.Application.ViewModel
         public bool Ativo { get; set; }
 
         //Endereco
+        [Key]
         public int EnderecoId { get; set; }
 
         [Required(ErrorMessage = "O CEP é obrigatório")]
@@ -47,5 +53,16 @@ namespace AGS.ERP.Application.ViewModel
         public int CidadeId { get; set; }
         [Display(Name = "Estado")]
         public string UF { get; set; }
+
+        #region Necessarias para AutoMapper
+        public virtual ICollection<EnderecoViewModel> Endereco { get; set; }
+        public virtual CidadeViewModel Cidade { get; set; }
+        public virtual EstadoViewModel Estado { get; set; }
+        public virtual ClienteViewModel Cliente { get; set; }
+        public virtual FornecedorViewModel Fornecedor { get; set; }
+        public ValidationResult ResultadoValidacao { get; private set; }
+
+        #endregion Necessarias para AutoMapper
+
     }
 }

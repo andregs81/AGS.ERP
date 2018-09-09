@@ -24,6 +24,7 @@ namespace AGS.ERP.Infra.CrossCutting.IoC
             services.AddScoped<IClienteAppService, ClienteAppService>();
             services.AddScoped<IEstadoAppService, EstadoAppService>();
             services.AddScoped<ICidadeAppService, CidadeAppService>();
+            services.AddScoped<IFornecedorAppService, FornecedorAppService>();
 
 
             //Domain Services
@@ -31,6 +32,7 @@ namespace AGS.ERP.Infra.CrossCutting.IoC
             services.AddScoped<IEnderecoService, EnderecoService>();
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<ICidadeService, CidadeService>();
+            services.AddScoped<IFornecedorService, FornecedorService>();
 
 
 
@@ -40,6 +42,7 @@ namespace AGS.ERP.Infra.CrossCutting.IoC
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<IEstadoRepository, EstadoRepository>();
             services.AddScoped<ICidadeRepository, CidadeRepository>();
+            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
         }
     }
 }

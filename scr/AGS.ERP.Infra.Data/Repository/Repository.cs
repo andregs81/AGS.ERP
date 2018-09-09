@@ -44,9 +44,9 @@ namespace AGS.ERP.Infra.Data.Repository
             return DbSet.ToList().ToList();
         }
 
-        public void Remove(TEntity obj)
+        public void Remove(int id)
         {
-            DbSet.Remove(obj);
+            DbSet.Remove(DbSet.Find(id));
         }
 
         public void Dispose()

@@ -10,7 +10,7 @@ namespace AGS.ERP.Domain.Interfaces.Repository
         TEntity GetById(int id);
         IEnumerable<TEntity> GetAll();
         void Update(TEntity obj);
-        void Remove(TEntity obj);
+        void Remove(int id);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         int SaveChanges();
     }

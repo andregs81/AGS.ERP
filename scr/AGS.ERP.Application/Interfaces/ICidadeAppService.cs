@@ -11,7 +11,7 @@ namespace AGS.ERP.Application.Interfaces
         CidadeViewModel GetById(int id);
         IEnumerable<CidadeViewModel> GetAll();
         void Update(CidadeViewModel obj);
-        void Remove(CidadeViewModel obj);
+        void Remove(int id);
         int SaveChanges();
     }
 }

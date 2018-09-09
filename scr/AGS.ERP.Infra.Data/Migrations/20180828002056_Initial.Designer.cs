@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AGS.ERP.Infra.Data.Migrations
 {
     [DbContext(typeof(AgsErpContext))]
-    [Migration("20180616204112_Popular-Db")]
-    partial class PopularDb
+    [Migration("20180828002056_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -53,15 +53,22 @@ namespace AGS.ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CNPJ");
+                    b.Property<string>("CNPJ")
+                        .HasColumnType("varchar(14)")
+                        .HasMaxLength(14);
 
-                    b.Property<string>("CPF");
+                    b.Property<string>("CPF")
+                        .HasColumnType("varchar(11)")
+                        .HasMaxLength(11);
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.HasKey("FornecedorId");
 
-                    b.ToTable("Fornecedor");
+                    b.ToTable("Fornecedores");
                 });
 
             modelBuilder.Entity("AGS.ERP.Domain.Entities.Geografia.Cidade", b =>
@@ -231,13 +238,11 @@ namespace AGS.ERP.Infra.Data.Migrations
 
                     b.HasOne("AGS.ERP.Domain.Entities.Cliente", "Cliente")
                         .WithMany("Endereco")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("AGS.ERP.Domain.Entities.Fornecedor", "Fornecedor")
                         .WithMany("Endereco")
-                        .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("FornecedorId");
 
                     b.HasOne("AGS.ERP.Domain.Entities.Geografia.Estado", "Estado")
                         .WithMany()

@@ -31,7 +31,7 @@ namespace AGS.ERP.Application.Services
             return Mapper.Map<Estado, EstadoViewModel>(_estadoService.GetByUF(UF));            
         }
 
-        public void Remove(EstadoViewModel obj)
+        public void Remove(int id)
         {
             throw new System.NotImplementedException();
         }

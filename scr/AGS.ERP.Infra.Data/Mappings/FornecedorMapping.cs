@@ -28,6 +28,10 @@ namespace AGS.ERP.Infra.Data.Mappings
                 .HasMaxLength(11)
                 .HasColumnType("varchar(11)");
 
+            builder.HasMany(f => f.Endereco)
+                .WithOne(e => e.Fornecedor)
+                .HasForeignKey("FornecedorId");
+
 
         }
     }

@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AGS.ERP.Infra.Data.Migrations
 {
     [DbContext(typeof(AgsErpContext))]
-    [Migration("20180616210320_Alteracao-Fornecedor")]
-    partial class AlteracaoFornecedor
+    [Migration("20180828002131_Popular-Dados")]
+    partial class PopularDados
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -238,13 +238,11 @@ namespace AGS.ERP.Infra.Data.Migrations
 
                     b.HasOne("AGS.ERP.Domain.Entities.Cliente", "Cliente")
                         .WithMany("Endereco")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("AGS.ERP.Domain.Entities.Fornecedor", "Fornecedor")
                         .WithMany("Endereco")
-                        .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("FornecedorId");
 
                     b.HasOne("AGS.ERP.Domain.Entities.Geografia.Estado", "Estado")
                         .WithMany()

@@ -11,16 +11,17 @@ namespace AGS.ERP.Application.AutoMapper
         {
             CreateMap<Cliente, ClienteViewModel>()
                 .ForMember(dest => dest.Endereco, opt => opt.MapFrom(src => src.Endereco));
-                
+
 
             CreateMap<Cliente, ClienteEnderecoViewModel>();
-            CreateMap<Endereco, ClienteEnderecoViewModel>();
-            
 
+
+            CreateMap<Endereco, ClienteEnderecoViewModel>();
             CreateMap<Endereco, EnderecoViewModel>();
             CreateMap<Cidade, CidadeViewModel>();
             CreateMap<Estado, EstadoViewModel>();
             CreateMap<TipoEndereco, TipoEnderecoViewModel>();
+            CreateMap<Fornecedor, FornecedorViewModel>();
         }
     }
 }

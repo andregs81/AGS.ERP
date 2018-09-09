@@ -34,7 +34,11 @@ namespace AGS.ERP.Application.ViewModel
 
         public int CidadeId { get; set; }
         public string UF { get; set; }
+        public int ClienteId  { get; set; }
+
+        public virtual ClienteViewModel Cliente { get; set; }
         public virtual CidadeViewModel Cidade { get; set; }
         public virtual EstadoViewModel Estado { get; set; }
+
     }
 }

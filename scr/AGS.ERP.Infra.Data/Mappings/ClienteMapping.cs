@@ -30,7 +30,9 @@ namespace AGS.ERP.Infra.Data.Mappings
                 .HasColumnType("varchar(14)")
                 .HasMaxLength(14);
 
-            builder.HasMany(c => c.Endereco);
+            builder.HasMany(c => c.Endereco)
+                .WithOne(e => e.Cliente)
+                .HasForeignKey("ClienteId");
 
             builder.Ignore(c => c.ResultadoValidacao);
 

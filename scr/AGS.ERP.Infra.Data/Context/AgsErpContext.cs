@@ -38,7 +38,7 @@ namespace AGS.ERP.Infra.Data.Context
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json")                
                 .Build();
 
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));

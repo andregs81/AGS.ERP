@@ -9,7 +9,7 @@ namespace AGS.ERP.Application.ViewModel
     {
         public CidadeViewModel()
         {
-            Estado = new EstadoViewModel();
+            
         }
 
         [Key]
@@ -20,6 +20,5 @@ namespace AGS.ERP.Application.ViewModel
         [Required(ErrorMessage = "Campo obrigatório")]
         public string UF { get; set; }
 
-        public virtual EstadoViewModel Estado { get; set; }
     }
 }
