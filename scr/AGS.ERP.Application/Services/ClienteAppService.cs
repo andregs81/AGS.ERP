@@ -6,6 +6,7 @@ using AGS.ERP.Domain.Entities.Geografia;
 using AGS.ERP.Domain.Interfaces.Services;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AGS.ERP.Application.Services
 {
@@ -33,16 +34,30 @@ namespace AGS.ERP.Application.Services
             if (!result.IsValid)
                 return DomainToApplicationResult(result);
 
-            _enderecoService.Add(endereco);
+            _clienteService.SaveChanges();
+            clienteEnderecoViewModel.ClienteId = cliente.ClienteId;
+
+            return DomainToApplicationResult(result);
+        }
+
+        public ValidationAppResult Add(ClienteViewModel clienteViewModel)
+        {
+            var cliente = Mapper.Map<ClienteViewModel, Cliente>(clienteViewModel);
+
+            var result = _clienteService.AddCliente(cliente);
+            if (!result.IsValid)
+                return DomainToApplicationResult(result);
 
             _clienteService.SaveChanges();
+
+            clienteViewModel.ClienteId = cliente.ClienteId;
 
             return DomainToApplicationResult(result);
         }
 
 
         public ClienteViewModel GetById(int id)
-        {
+        {            
             return Mapper.Map<Cliente, ClienteViewModel>(_clienteService.GetById(id));
         }
 
@@ -80,6 +95,13 @@ namespace AGS.ERP.Application.Services
         public void Dispose()
         {
             _clienteService.Dispose();
+        }
+
+        public ClienteViewModel ClienteCompleto(int clienteId)
+        {
+            var cliente = _clienteService.ClienteCompleto(clienteId);
+
+            return Mapper.Map<Cliente, ClienteViewModel>(cliente);
         }
     }
 }

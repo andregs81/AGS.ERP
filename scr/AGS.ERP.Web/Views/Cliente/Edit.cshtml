@@ -1,51 +1,122 @@
 ﻿@model AGS.ERP.Application.ViewModel.ClienteViewModel
+<script src="~/js/Cliente.js"></script>
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h2>Edit</h2>
+<h2 class="jumbotron">Cadastro de Cliente</h2>
 
-<h4>Cliente</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-12">
+        <form asp-action="Edit" id="FormCliente">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClienteId" />
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CNPJ" class="control-label"></label>
-                <input asp-for="CNPJ" class="form-control" />
-                <span asp-validation-for="CNPJ" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
-                    </label>
+
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                Dados Pessoais
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <input type="hidden" asp-for="ClienteId"/>
+
+                            <div class="form-group col-md-3">
+                                <label asp-for="Nome" class="control-label"></label>
+                                <input asp-for="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="TipoPessoa" class="control-label">Tipo Pessoa</label>
+                                <select id="TipoPessoa" class="form-control" onchange="selecionaTipoPessoa(this.value)">
+                                    <option value="F">Física</option>
+                                    <option value="J">Jurídica</option>
+                                </select>
+                                
+                            </div>
+
+                            <div id="DIVCPF" class="form-group col-md-3">
+                                <label asp-for="CPF" class="control-label"></label>
+                                <input asp-for="CPF" class="form-control" />
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                            </div>
+                            <div id="DIVCNPJ" class="form-group col-md-3">
+                                <label asp-for="CNPJ" class="control-label"></label>
+                                <input asp-for="CNPJ" class="form-control" />
+                                <span asp-validation-for="CNPJ" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                Endereço
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <div class="panel-body" id="Enderecos">
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <div class="col-md-12">
+                <button id="btnEditCliente" onclick="EditarCliente(@Model.ClienteId)" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-saved"></span> Salvar Cliente</button>
+                <a asp-action="Index" class="btn btn-danger">
+                    <i class="fas fa-times"></i> Cancelar</a>
+            </div>            
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/js/Cliente.js"></script>
+    <script src="~/js/Endereco.js"></script>
+
+    <script>
+        $(document).ready(function(){            
+            var id = $("#ClienteId").val();            
+            ListarEndereco(id);
+
+            const cpf = $("#CPF").val();
+            if(cpf !== null && cpf !== ""){
+                $("#TipoPessoa").val('F');
+            }
+            else{
+                 $("#TipoPessoa").val('J');
+            }
+            $("#TipoPessoa").trigger('change');
+
+        });
+    </script>
+
+
 }
+
+
+
+

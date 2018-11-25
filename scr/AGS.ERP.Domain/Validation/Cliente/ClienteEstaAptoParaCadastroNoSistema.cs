@@ -8,10 +8,10 @@ namespace AGS.ERP.Domain.Validation
     {
         public ClienteEstaAptoParaCadastroNoSistema()
         {
-            var clienteEndereco = new ClientePossuiEnderecoCadastradoSpecification();
+            //var clienteEndereco = new ClientePossuiEnderecoCadastradoSpecification();
             var clienteAtivo = new ClientePossuiStatusAtivoSpecification();
 
-            base.AdicionarRegra("ClienteSemEndereco", new Regra<Cliente>(clienteEndereco, "Cliente não possui endereço cadastrado"));
+            //base.AdicionarRegra("ClienteSemEndereco", new Regra<Cliente>(clienteEndereco, "Cliente não possui endereço cadastrado"));
             base.AdicionarRegra("ClienteAtivo", new Regra<Cliente>(clienteAtivo, "Cliente não está ativo no sistema"));
         }
     }

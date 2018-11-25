@@ -1,0 +1,98 @@
+﻿@model IEnumerable<AGS.ERP.Application.ViewModel.EnderecoViewModel>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<div class="form-group">
+    <a href="#" id ="btnAddEndereco" name="btnAddEndereco" onclick="addEndereco()" class="btn btn-success">Adicionar</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CEP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complemento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoEndereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CEP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Logradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complemento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoEndereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado.UF)
+                </td>
+                <td>
+                    <a href="#" class="btn btn-primary" onclick="editEndereco(@item.EnderecoId)">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> 
+                    <a asp-action="Details" asp-route-id="@item.EnderecoId" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a> 
+                    <a asp-action="Delete" asp-route-id="@item.EnderecoId" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Endereço</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="divCamposEndereco" class="form-group"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSalvarEndereco" onclick="salvarEnderecoCliente()" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-floppy-disk"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

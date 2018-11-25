@@ -14,10 +14,10 @@ namespace AGS.ERP.Application.ViewModel
 
         [Key]
         public int CidadeId { get; set; }
-        [Required(ErrorMessage ="Campo obrigatório")]
+        [Required(ErrorMessage ="Campo Cidade é obrigatório")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
+        [Required(ErrorMessage = "Campo Estado é obrigatório")]
         public string UF { get; set; }
 
     }

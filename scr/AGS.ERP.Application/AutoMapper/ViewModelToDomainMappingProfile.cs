@@ -10,18 +10,25 @@ namespace AGS.ERP.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<ClienteViewModel, Cliente>();
-            CreateMap<ClienteEnderecoViewModel, Cliente>();
+            CreateMap<ClienteViewModel, Cliente>()
+                .MaxDepth(30);
+            CreateMap<ClienteEnderecoViewModel, Cliente>()
+                .MaxDepth(30);
 
             CreateMap<ClienteEnderecoViewModel, Endereco>()
-             .ForMember(s => s.Fornecedor, opt => opt.Ignore());
+             .ForMember(s => s.Fornecedor, opt => opt.Ignore())
+             .MaxDepth(30);
 
-            CreateMap<EnderecoViewModel, Endereco>();
+            CreateMap<EnderecoViewModel, Endereco>()
+                .MaxDepth(30);
 
-            CreateMap<CidadeViewModel, Cidade>();
-            CreateMap<EstadoViewModel, Estado>();
+            CreateMap<CidadeViewModel, Cidade>()
+                .MaxDepth(30);
+            CreateMap<EstadoViewModel, Estado>()
+                .MaxDepth(30);
             CreateMap<TipoEnderecoViewModel, TipoEndereco>();
-            CreateMap<FornecedorViewModel, Fornecedor>();
+            CreateMap<FornecedorViewModel, Fornecedor>()
+                .MaxDepth(30);
 
         }
     }

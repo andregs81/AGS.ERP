@@ -25,6 +25,8 @@ namespace AGS.ERP.Infra.CrossCutting.IoC
             services.AddScoped<IEstadoAppService, EstadoAppService>();
             services.AddScoped<ICidadeAppService, CidadeAppService>();
             services.AddScoped<IFornecedorAppService, FornecedorAppService>();
+            services.AddScoped<IEnderecoAppService, EnderecoAppService>();
+
 
 
             //Domain Services
@@ -33,8 +35,7 @@ namespace AGS.ERP.Infra.CrossCutting.IoC
             services.AddScoped<IEstadoService, EstadoService>();
             services.AddScoped<ICidadeService, CidadeService>();
             services.AddScoped<IFornecedorService, FornecedorService>();
-
-
+            
 
             //data repo
             services.AddScoped<AgsErpContext>();

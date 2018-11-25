@@ -16,7 +16,7 @@ namespace AGS.ERP.Application.ViewModel
         [MaxLength(10, ErrorMessage = "O tamanho máximo é {1}")]
         public string CEP { get; set; }
 
-        [Required(ErrorMessage ="Campo requerido")]
+        [Required(ErrorMessage ="Logradouro Campo requerido")]
         [MaxLength(200, ErrorMessage = "O tamanho máximo é {1}")]
         public string Logradouro { get; set; }
 
@@ -34,9 +34,10 @@ namespace AGS.ERP.Application.ViewModel
 
         public int CidadeId { get; set; }
         public string UF { get; set; }
-        public int ClienteId  { get; set; }
+        public int? ClienteId  { get; set; }
+        public int? FornecedorId { get; set; }
 
-        public virtual ClienteViewModel Cliente { get; set; }
+        //public virtual ClienteViewModel Cliente { get; set; } Removi essa propriedade pois estava dando erro de referencia circular com ClienteViewModel
         public virtual CidadeViewModel Cidade { get; set; }
         public virtual EstadoViewModel Estado { get; set; }
 

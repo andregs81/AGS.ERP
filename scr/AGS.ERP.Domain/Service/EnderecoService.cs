@@ -16,5 +16,15 @@ namespace AGS.ERP.Domain.Service
         {
             _enderecoRepository = enderecoRepository;
         }
+
+        public IEnumerable<Endereco> ObterEnderecoPorCliente(int idCliente)
+        {
+            return _enderecoRepository.ObterEnderecoPorCliente(idCliente);
+        }
+
+        public IEnumerable<Endereco> ObterEnderecoPorFornecedor(int idFornecedor)
+        {
+            return _enderecoRepository.ObterEnderecoPorFornecedor(idFornecedor);
+        }
     }
 }

@@ -1,53 +1,137 @@
 ﻿@model IEnumerable<AGS.ERP.Application.ViewModel.ClienteViewModel>
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/Cliente.js"></script>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Clientes";
 }
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><i class="fas fa-users fa-3x"></i> @ViewData["Title"]</h2>
+    </div>
+    <div class="panel-body">
+        <p>
+            <a asp-action="Create" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Adicionar</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CPF)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CNPJ)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-id=item.ClienteId>
+                            @Html.DisplayFor(modelItem => item.ClienteId)
+                        </td>
+                        <td data-nome=item.Nome>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CPF)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CNPJ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ClienteId" class="btn btn-warning btn-sm">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>&nbsp&nbsp&nbsp
+                            <a asp-action="Details" asp-route-id="@item.ClienteId" class="btn btn-info btn-sm">
+                                <i class="glyphicon glyphicon-info-sign"></i>
+                            </a>&nbsp&nbsp&nbsp
+                            <a id="btnExluirCliente" onclick="excluirCliente(@item.ClienteId, '@item.Nome')" class="btn btn-danger btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CPF)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CNPJ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CNPJ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ClienteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClienteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClienteId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="keyValue" value=0 />
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+                <button id="btnConfirma" type="button" class="btn btn-primary">Confirma</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#btnConfirma").click(function (e) {
+            e.preventDefault();
+            var url = "/Cliente/Delete";
+            var id = $(this).val();
+            debugger;
+            $.ajax({
+                url: url,
+                type: "POST",
+                datatype: "json",
+                data: { id: id },
+                success: function () {
+                    toastr.success("Cliente id: " + id + "removido!");
+                    setTimeout(function () {
+                        window.location.href = "/Cliente/Index";
+                    }, 2500);
+                },
+                error: function () {
+                    alert("Erro durante a requisição");
+                }
+            });
+
+        });
+    });
+
+    function excluirCliente(id, nome) {
+
+        $(".modal-title").text("Exclusão");
+        $(".modal-body").html(
+            "<p>Você deseja realmente excluir o cliente id: " + "<b>" + id + " - " + nome + "<b> ?" + "</p>");
+        $("#btnConfirma").val(id);
+
+        $(".modal").modal("show");
+
+    }
+</script>

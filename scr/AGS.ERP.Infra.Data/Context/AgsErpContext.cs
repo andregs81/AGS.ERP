@@ -41,7 +41,9 @@ namespace AGS.ERP.Infra.Data.Context
                 .AddJsonFile("appsettings.json")                
                 .Build();
 
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            optionsBuilder
+                .UseSqlServer(config.GetConnectionString("DefaultConnection"))
+                .UseLazyLoadingProxies();
         }
     }
 }

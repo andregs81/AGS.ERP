@@ -1,0 +1,81 @@
+﻿@model AGS.ERP.Application.ViewModel.EnderecoViewModel
+
+<div class="row">
+    <input type="hidden" asp-for="EnderecoId" value="0" />
+    <div class="form-group col-md-2">
+        <label asp-for="CEP" class="control-label"></label>
+        <input asp-for="CEP" class="form-control" />
+        <span asp-validation-for="CEP" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="Logradouro" class="control-label"></label>
+        <input asp-for="Logradouro" class="form-control" />
+        <span asp-validation-for="Logradouro" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-2">
+        <label asp-for="Numero" class="control-label"></label>
+        <input asp-for="Numero" class="form-control" />
+        <span asp-validation-for="Numero" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="Complemento" class="control-label"></label>
+        <input asp-for="Complemento" class="form-control" />
+        <span asp-validation-for="Complemento" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="Bairro" class="control-label"></label>
+        <input asp-for="Bairro" class="form-control" />
+        <span asp-validation-for="Bairro" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-2">
+        <label asp-for="TipoEndereco" class="control-label">Tipo Endereço</label>
+        <select asp-for="TipoEndereco" class="form-control" asp-items="ViewBag.TipoEndereco"></select>
+        <span asp-validation-for="TipoEndereco" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-4">
+        <label asp-for="CidadeId" class="control-label">Cidade</label>
+        <select asp-for="CidadeId" class="form-control" asp-items="ViewBag.CidadeId"><option>Selecione uma Cidade</option></select>
+
+        <span asp-validation-for="CidadeId" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="UF" class="control-label"></label>
+        <select asp-for="UF" class="form-control" asp-items="ViewBag.UF"><option>UF</option></select>
+        <span asp-validation-for="UF" class="text-danger"></span>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#CidadeId").change(function (e) {
+            e.preventDefault();
+            var url = "/Cliente/GetStateByCity";
+            var idCidade = $("#CidadeId").val();
+
+            if (idCidade.indexOf("Selecione") >= 0) {
+                $("#UF").val('UF');
+                return;
+            } else {
+                obterEstado(url, idCidade);
+            }
+        });
+
+        function obterEstado(url, idCidade) {
+            $.ajax({
+                url: url
+                , type: "GET"
+                , dataType: "json"
+                , data: { idCidade: idCidade }
+                , success: function (data) {
+
+                    var uf = data;
+                    $("#UF").val(uf);
+                }
+
+            });
+        }
+    });
+
+
+</script>

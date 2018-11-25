@@ -1,42 +1,109 @@
 ﻿@model AGS.ERP.Application.ViewModel.ClienteViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2 class="jumbotron">Cadastro de Cliente</h2>
 
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CNPJ)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CNPJ)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Ativo)
-        </dd>
-    </dl>
+<div class="panel panel-default">
+    <div class="panel-heading">Dados Pessoais</div>
+    <div class="panel-body">
+        <p><b>Nome:</b> @Model.Nome</p>
+        <p data-cpf="@Model.CPF" id="pCPF" hidden="hidden"><b>CPF:</b> @Model.CPF</p>
+        <p id="pCNPJ" hidden="hidden"><b>CNPJ:</b> @Model.CNPJ</p>
+        <div class="form-check">
+            <label class="form-check-label" for="Ativo">Ativo:</label>
+            @Html.CheckBoxFor(model => model.Ativo, new { @class = "form-check-input", @disabled = "disabled" })
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Endereço</div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        CEP
+                    </th>
+                    <th>
+                        Logradouro
+                    </th>
+                    <th>
+                        Numero
+                    </th>
+                    <th>
+                        Complemento
+                    </th>
+                    <th>
+                        Bairro
+                    </th>
+                    <th>
+                        Tipo de Endereço
+                    </th>
+                    <th>
+                        Cidade
+                    </th>
+                    <th>
+                        UF
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Endereco)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CEP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Logradouro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Complemento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bairro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoEndereco)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cidade.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado.UF)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ClienteId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id=@Model.ClienteId class="btn btn-warning">
+        <i class="fas fa-pencil-alt"></i>  Editar
+    </a>
+    <a asp-action="Index" class="btn btn-danger">
+        <i class="fas fa-list"></i>  Voltar para Lista
+    </a>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var cpf = $("#pCPF").data('cpf');
+
+        if (cpf !== null && cpf !== '') {
+            $("#pCPF").show();
+        } else {
+            $("#pCNPJ").show();
+        };
+
+    });
+</script>

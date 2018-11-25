@@ -23,7 +23,7 @@ namespace AGS.ERP.Application.ViewModel
         [Display(Name = "Ativo?")]
         public bool Ativo { get; set; }
 
-        public virtual IEnumerable<EnderecoViewModel> Endereco { get; set; }
+        public virtual IEnumerable<EnderecoViewModel> Endereco { get; set; } = new List<EnderecoViewModel>();
 
 
         public ValidationResult ResultadoValidacao { get; private set; }

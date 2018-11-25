@@ -32,5 +32,10 @@ namespace AGS.ERP.Domain.Service
 
             return resultadoValidacao;
         }
+
+        public Cliente ClienteCompleto(int id)
+        {
+            return _clienteRepository.ClienteCompleto(id);
+        }
     }
 }

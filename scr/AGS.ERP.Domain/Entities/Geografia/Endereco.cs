@@ -11,6 +11,8 @@
         public TipoEndereco TipoEndereco { get; set; }
         public int CidadeId { get; set; }
         public string UF { get; set; }
+        public int? ClienteId { get; set; }
+        public int? FornecedorId { get; set; }
 
         public virtual Cidade Cidade { get; set; }
         public virtual Estado Estado { get; set; }
