@@ -4,7 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h2 class="jumbotron">Cadastro de Cliente</h2>
+<h2 class="jumbotron">
+    <i class="fas fa-user fa-2x"></i> Cadastro de Cliente</h2>
 
 <hr />
 <div class="row">
@@ -87,9 +88,9 @@
         </form>
     </div>
     <div class="col-md-12">
-        <button id="btnSalvarCliente" onclick="SalvarCliente()" class="btn btn-success">
+        <button id="btnSalvarCliente" onclick="SalvarCliente()" class="btn btn-success btn-sm"">
             <span class="glyphicon glyphicon-floppy-saved"></span> Salvar</button>
-        <a asp-action="Index" class="btn btn-danger">
+        <a asp-action="Index" class="btn btn-danger btn-sm"">
             <i class="fas fa-times"></i> Cancelar</a>
     </div>
 </div>

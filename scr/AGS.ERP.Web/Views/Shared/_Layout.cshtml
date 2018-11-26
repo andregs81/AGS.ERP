@@ -20,6 +20,15 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     </environment>
+
+    <script type="text/javascript">
+        document.onreadystatechange = function () {
+            setTimeout(function () {
+                document.getElementById('loader').style.visibility = "hidden";
+            }, 1000);
+        }
+    </script>
+
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -44,6 +53,8 @@
             </div>
         </div>
     </nav>
+    <div id="loader">
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -51,7 +62,6 @@
             <p>&copy; 2018 - AGS.ERP.Web</p>
         </footer>
     </div>
-
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

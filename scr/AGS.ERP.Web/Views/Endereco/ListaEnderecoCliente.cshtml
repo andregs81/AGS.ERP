@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<AGS.ERP.Application.ViewModel.EnderecoViewModel>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <div class="form-group">
-    <a href="#" id ="btnAddEndereco" name="btnAddEndereco" onclick="addEndereco()" class="btn btn-success">Adicionar</a>
+    <a href="#" id ="btnAddEndereco" name="btnAddEndereco" onclick="addEndereco()" class="btn btn-success btn-sm">
+        <i class="fas fa-plus"></i> Adicionar</a>
 </div>
 <table class="table">
     <thead>
@@ -62,12 +63,12 @@
                     @Html.DisplayFor(modelItem => item.Estado.UF)
                 </td>
                 <td>
-                    <a href="#" class="btn btn-primary" onclick="editEndereco(@item.EnderecoId)">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> 
-                    <a asp-action="Details" asp-route-id="@item.EnderecoId" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a> 
-                    <a asp-action="Delete" asp-route-id="@item.EnderecoId" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    <a href="#" class="btn btn-primary btn-sm" onclick="editEndereco(@item.EnderecoId)">
+                        <i class="fas fa-pencil-alt"></i></a> 
+                    <a asp-action="Details" asp-route-id="@item.EnderecoId" class="btn btn-info btn-sm">
+                        <i class="glyphicon glyphicon-info-sign"></i></a> 
+                    <a asp-action="Delete" asp-route-id="@item.EnderecoId" class="btn btn-danger btn-sm">
+                        <i class="far fa-trash-alt"></i></a>
                 </td>
             </tr>
         }
@@ -89,9 +90,10 @@
                 <div id="divCamposEndereco" class="form-group"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnModalClose" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cancelar</button>
                 <button type="button" id="btnSalvarEndereco" onclick="salvarEnderecoCliente()" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-disk"></span></button>
+                    <span class="glyphicon glyphicon-floppy-saved"></span> Salvar</button>
             </div>
         </div>
     </div>

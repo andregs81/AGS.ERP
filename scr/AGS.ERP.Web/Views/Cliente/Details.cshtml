@@ -4,7 +4,8 @@
     ViewData["Title"] = "Detalhes";
 }
 
-<h2 class="jumbotron">Cadastro de Cliente</h2>
+<h2 class="jumbotron">
+    <i class="fas fa-user fa-2x"></i> Detalhes do Cliente</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">Dados Pessoais</div>
@@ -86,10 +87,10 @@
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id=@Model.ClienteId class="btn btn-warning">
+    <a asp-action="Edit" asp-route-id=@Model.ClienteId class="btn btn-warning btn-sm">
         <i class="fas fa-pencil-alt"></i>  Editar
     </a>
-    <a asp-action="Index" class="btn btn-danger">
+    <a asp-action="Index" class="btn btn-danger btn-sm">
         <i class="fas fa-list"></i>  Voltar para Lista
     </a>
 </div>
