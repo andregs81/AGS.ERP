@@ -14,11 +14,13 @@ namespace AGS.ERP.Application.Services
     {
         private readonly IEnderecoService _enderecoService;
         private readonly IClienteAppService _clienteAppService;
+        private readonly ICidadeAppService _cidadeAppService;
 
-        public EnderecoAppService(IEnderecoService enderecoService, IClienteAppService clienteAppService)
+        public EnderecoAppService(IEnderecoService enderecoService, IClienteAppService clienteAppService, ICidadeAppService cidadeAppService)
         {
             _enderecoService = enderecoService;
             _clienteAppService = clienteAppService;
+            _cidadeAppService = cidadeAppService;
         }
 
         public IEnumerable<EnderecoViewModel> ListarEnderecosPorCliente(int clienteId)
@@ -40,11 +42,6 @@ namespace AGS.ERP.Application.Services
             return Mapper.Map<IEnumerable<Endereco>, IEnumerable<EnderecoViewModel>>(endereco);
         }
 
-        public void Dispose()
-        {
-            _enderecoService.Dispose();
-        }
-
         public EnderecoViewModel GetById(int id)
         {
             return Mapper.Map<Endereco, EnderecoViewModel>(_enderecoService.GetById(id));
@@ -63,6 +60,22 @@ namespace AGS.ERP.Application.Services
             var endereco = Mapper.Map<ClienteEnderecoViewModel, Endereco>(clienteEndereco);
             _enderecoService.Update(endereco);
             _enderecoService.SaveChanges();
+        }
+
+        public void Delete(int enderecoId)
+        {
+            _enderecoService.Remove(enderecoId);
+            _enderecoService.SaveChanges();
+        }
+
+        public int ObterIdPorCidade(string cidadeNome, string uf)
+        {
+            return _cidadeAppService.GetAll().Where(e => e.Nome == cidadeNome.ToUpper() && e.UF == uf.ToUpper()).FirstOrDefault().CidadeId;
+        }
+
+        public void Dispose()
+        {
+            _enderecoService.Dispose();
         }
     }
 }

@@ -11,6 +11,9 @@ namespace AGS.ERP.Application.Interfaces
         IEnumerable<EnderecoViewModel> ObterEnderecoPorFornecedor(int idFornecedor);
         void Add(ClienteEnderecoViewModel clienteEndereco);
         void Update(ClienteEnderecoViewModel clienteEndereco);
+        void Delete(int enderecoId);
+        int ObterIdPorCidade(string cidadeNome, string uf);
         EnderecoViewModel GetById(int id);
     }
 }
+

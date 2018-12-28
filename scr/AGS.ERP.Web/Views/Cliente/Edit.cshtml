@@ -5,7 +5,7 @@
     ViewData["Title"] = "Editar";
 }
 
-<h2 class="jumbotron">Cadastro de Cliente</h2>
+@Html.Partial("_CabecalhoCliente")
 
 <hr />
 <div class="row">
@@ -25,7 +25,7 @@
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            <input type="hidden" asp-for="ClienteId"/>
+                            <input type="hidden" asp-for="ClienteId" />
 
                             <div class="form-group col-md-3">
                                 <label asp-for="Nome" class="control-label"></label>
@@ -39,7 +39,7 @@
                                     <option value="F">Física</option>
                                     <option value="J">Jurídica</option>
                                 </select>
-                                
+
                             </div>
 
                             <div id="DIVCPF" class="form-group col-md-3">
@@ -83,10 +83,12 @@
             </div>
             <div class="col-md-12">
                 <button id="btnEditCliente" onclick="EditarCliente(@Model.ClienteId)" class="btn btn-success btn-sm">
-                    <span class="glyphicon glyphicon-floppy-saved"></span> Salvar Cliente</button>
+                    <span class="glyphicon glyphicon-floppy-saved"></span> Salvar Cliente
+                </button>
                 <a asp-action="Index" class="btn btn-danger btn-sm">
-                    <i class="fas fa-times"></i> Cancelar</a>
-            </div>            
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
         </form>
     </div>
 </div>
@@ -98,16 +100,16 @@
     <script src="~/js/Endereco.js"></script>
 
     <script>
-        $(document).ready(function(){            
-            var id = $("#ClienteId").val();            
+        $(document).ready(function () {
+            var id = $("#ClienteId").val();
             ListarEndereco(id);
 
             const cpf = $("#CPF").val();
-            if(cpf !== null && cpf !== ""){
+            if (cpf !== null && cpf !== "") {
                 $("#TipoPessoa").val('F');
             }
-            else{
-                 $("#TipoPessoa").val('J');
+            else {
+                $("#TipoPessoa").val('J');
             }
             $("#TipoPessoa").trigger('change');
 

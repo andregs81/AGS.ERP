@@ -172,26 +172,27 @@ namespace AGS.ERP.Web.Controllers
             }
         }
 
-        // GET: Endereco/Delete/5
-        public ActionResult Delete(int id)
+
+        public ActionResult ObterCidadeIdByName(string cidade, string uf)
         {
-            return View();
+            int id = _enderecoAppService.ObterIdPorCidade(cidade, uf);
+            return Json(new { id = id });
         }
 
         // POST: Endereco/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
+                _enderecoAppService.Delete(id);
+                return Ok();
             }
             catch
             {
-                return View();
+                return BadRequest();
             }
         }
     }

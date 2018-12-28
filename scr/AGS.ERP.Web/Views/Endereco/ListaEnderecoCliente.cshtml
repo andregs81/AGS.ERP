@@ -65,9 +65,9 @@
                 <td>
                     <a href="#" class="btn btn-primary btn-sm" onclick="editEndereco(@item.EnderecoId)">
                         <i class="fas fa-pencil-alt"></i></a> 
-                    <a asp-action="Details" asp-route-id="@item.EnderecoId" class="btn btn-info btn-sm">
+                    <a onclick="detalhesEndereco(@item.EnderecoId)" class="btn btn-info btn-sm">
                         <i class="glyphicon glyphicon-info-sign"></i></a> 
-                    <a asp-action="Delete" asp-route-id="@item.EnderecoId" class="btn btn-danger btn-sm">
+                    <a onclick="confirmDeleteEndereco(@item.EnderecoId)"  class="btn btn-danger btn-sm">
                         <i class="far fa-trash-alt"></i></a>
                 </td>
             </tr>
@@ -94,6 +94,52 @@
                     <i class="fas fa-times"></i> Cancelar</button>
                 <button type="button" id="btnSalvarEndereco" onclick="salvarEnderecoCliente()" class="btn btn-primary">
                     <span class="glyphicon glyphicon-floppy-saved"></span> Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEnderecoDetalhes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Endereço</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="divCamposEndereco" class="form-group"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalClose" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Excluir Endereço</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="idEnderecoDelete" value=0/>
+                <p>Deseja realmente excluir?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalClose" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" id="btnSalvarEndereco" data-id=0 onclick="deleteEndereco()" class="btn btn-success">
+                    <i class="fas fa-check"></i> Confirmar
+                </button>
             </div>
         </div>
     </div>

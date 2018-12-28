@@ -4,7 +4,7 @@
     <input type="hidden" asp-for="EnderecoId" value="0" />
     <div class="form-group col-md-2">
         <label asp-for="CEP" class="control-label"></label>
-        <input asp-for="CEP" class="form-control" />
+        <input asp-for="CEP" onblur="obterEnderecoCep(CEP.value)" class="form-control" />
         <span asp-validation-for="CEP" class="text-danger"></span>
     </div>
     <div class="form-group col-md-5">
